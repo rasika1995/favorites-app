@@ -84,16 +84,20 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="item-list" style={{display: 'flex', flexWrap: 'wrap'}}>
-      {items.map((item: Item) => (
-        <ItemCard
-          key={item.id}
-          item={item}
-          cardType='ITEM_CARD'
-          onToggleFavorite={() => handleToggleFavorite(item.id, item.isFavorite)}
-        />
-      ))}
-    </div> 
+    <>
+      <div className="item-list" style={{display: 'flex', flexWrap: 'wrap'}}>
+        {items.map((item: Item) => (
+          <ItemCard
+            key={item.id}
+            item={item}
+            cardType='ITEM_CARD'
+            onToggleFavorite={() => handleToggleFavorite(item.id, item.isFavorite)}
+          />
+        ))}
+      </div>
+      <br/>
+      <br/>
+    </>
   );
 };
 

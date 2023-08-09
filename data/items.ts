@@ -4,7 +4,7 @@ export const items = [
         {
           "id": 1,
           "title": "iPhone 13 Pro Max",
-          "description": "Experience the ultimate iPhone with the A15 Bionic chip, ProMotion display, and triple-camera system. #iphone #13promax",
+          "description": "Experience the ultimate iPhone with the A15 Bionic chip, ProMotion display, and triple-camera system.",
           "price": 1500,
           "currency": "USD",
           "postedDate": "2023-08-01",
@@ -56,9 +56,7 @@ export const items = [
           "logoImageUrl": "http://localhost:3000/phone-3.jpeg",
           "logoTitle": "xbob",
           "numberOfLikes": 32,
-          "comments": [
-            { "commenter": "User3", "comment": "Nice product!", "postedDate": "2023-08-02" }
-          ]
+          "comments": []
         },
         {
           "id": 5,
@@ -71,6 +69,8 @@ export const items = [
           "logoImageUrl": "http://localhost:3000/phone-3.jpeg",
           "logoTitle": "gaggybob",
           "numberOfLikes": 28,
-          "comments": []
+          "comments": [
+            { "commenter": "User3", "comment": "Nice product!", "postedDate": "2023-08-02" }
+          ]
         },
 ]      
