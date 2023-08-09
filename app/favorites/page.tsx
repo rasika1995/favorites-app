@@ -1,20 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
-interface Item {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-  comments: Array<{
-    commenter: string;
-    comment: string;
-    postedDate: string;
-  }>
-}
-
+import ItemCard, { Item } from '@/components/item-card';
 
 const FavoritesPage: React.FC = () => {
   const [favoriteItems, setFavoriteItems] = useState<Array<Item>>([]);
@@ -34,28 +21,16 @@ const FavoritesPage: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <div>This is the Favorites page</div>
-      <ul>
-        {favoriteItems.length>=0 && favoriteItems.map((item: Item) => (
-          <div className="item">
-          <h2>{item.title}</h2>
-          <p>{item.description}</p>
-          <p>Price: ${item.price.toFixed(2)}</p>
-          <div className="comments">
-            <h3>Comments</h3>
-            <ul>
-              {item.comments.map((comment, index) => (
-                <li key={index}>
-                  <strong>{comment.commenter}:</strong> {comment.comment}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        ))}
-      </ul>
-    </>
+    <div className="item-list" style={{display: 'flex', flexWrap: 'wrap'}}>
+      {favoriteItems.map((item: Item) => (
+        <ItemCard
+          key={item.id}
+          item={item}
+          cardType='FAVORITE_CARD'
+          onToggleFavorite={() => {}}
+        />
+      ))}
+    </div>
   );
 };
 

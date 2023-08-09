@@ -1,25 +1,10 @@
 "use client"
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import Item from "@/components/item";
-
-interface Item {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-  comments: Array<{
-    commenter: string;
-    comment: string;
-    postedDate: string;
-  }>
-  isFavorite: boolean;
-}
+import ItemCard, { Item } from "@/components/item-card";
 
 const HomePage: React.FC = () => {
   const [items, setItems] = useState<Array<Item>>([]);
-
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -99,20 +84,16 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Items</h1>
-      <hr/>
-      <div className="item-list">
-        {items.map((item: Item) => (
-          <Item
-            key={item.id}
-            item={item}
-            onToggleFavorite={() => handleToggleFavorite(item.id, item.isFavorite)}
-          />
-        ))}
-      </div>
-      <br />
-    </div>
+    <div className="item-list" style={{display: 'flex', flexWrap: 'wrap'}}>
+      {items.map((item: Item) => (
+        <ItemCard
+          key={item.id}
+          item={item}
+          cardType='ITEM_CARD'
+          onToggleFavorite={() => handleToggleFavorite(item.id, item.isFavorite)}
+        />
+      ))}
+    </div> 
   );
 };
 

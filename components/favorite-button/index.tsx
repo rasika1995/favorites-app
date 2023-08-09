@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from '../item-card/item-card.module.scss';
 
 interface FavoriteButtonProps {
   isFavorite: boolean;
@@ -10,8 +11,8 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   onToggleFavorite,
 }) => {
   return (
-    <button onClick={onToggleFavorite}>
-      {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+    <button onClick={onToggleFavorite} className={styles['heart-button']}>
+      {isFavorite ? '❤️' : '🤍'}
     </button>
   );
 };
