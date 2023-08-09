@@ -64,7 +64,7 @@ const ItemCard: React.FC<ItemProps> = ({ item, onToggleFavorite, cardType }) => 
       </div>
       <div className={styles['likes-container']}>
         <FontAwesomeIcon icon={faHeart} color={'blue'} />
-        <p>{item.numberOfLikes} likes</p>
+        <p>{(item.isFavorite || cardType === 'FAVORITE_CARD') ? item.numberOfLikes+1: item.numberOfLikes} likes</p>
       </div>
       <p
         className={`${styles.description}`}
