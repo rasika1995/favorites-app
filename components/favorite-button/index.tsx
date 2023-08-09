@@ -6,6 +6,13 @@ interface FavoriteButtonProps {
   onToggleFavorite: () => void;
 }
 
+/**
+ * FavoriteButton component displays a heart icon button that represents the favorite state.
+ * It changes its appearance based on whether the item is marked as a favorite or not.
+ *
+ * @param {boolean} isFavorite - Whether the item is marked as favorite.
+ * @param {function} onToggleFavorite - Callback function to toggle the favorite state.
+ */
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   isFavorite,
   onToggleFavorite,

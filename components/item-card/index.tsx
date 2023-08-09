@@ -1,15 +1,19 @@
 import React from 'react';
 import FavoriteButton from '../favorite-button';
 import styles from './item-card.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export interface Item {
   id: number;
   title: string;
   description: string;
   price: number;
+  currency: string;
   imageUrl: string;
   logoImageUrl: string;
   logoTitle: string;
+  numberOfLikes: string;
   comments: Array<{
     commenter: string;
     comment: string;
@@ -24,6 +28,14 @@ interface ItemProps {
   cardType: 'FAVORITE_CARD' | 'ITEM_CARD';
 }
 
+/**
+ * ItemCard component displays an item card with title, logo, price, likes, and description.
+ * It can be used as a regular item card or as a favorite card.
+ *
+ * @param {Object} item - The item object containing details.
+ * @param {function} onToggleFavorite - Callback function to toggle item favorite state.
+ * @param {string} cardType - Type of card ('FAVORITE_CARD' or 'ITEM_CARD').
+ */
 const ItemCard: React.FC<ItemProps> = ({ item, onToggleFavorite, cardType }) => {
   const cardStyle = {
     backgroundImage: `url(${item.imageUrl})`,
@@ -34,7 +46,6 @@ const ItemCard: React.FC<ItemProps> = ({ item, onToggleFavorite, cardType }) => 
     return description.replace(regex, '<span class="' + styles.hashtag + '">$&</span>');
   };
   
-
   return (
     <div className={styles.item}>
       <div className={styles['item-logo']}>
@@ -46,10 +57,14 @@ const ItemCard: React.FC<ItemProps> = ({ item, onToggleFavorite, cardType }) => 
           <div className={styles.title}>
             {item.title}
             <br />
-            AED {item.price.toFixed(2)}
+            {item.currency} {item.price.toFixed(2)}
           </div>
           {cardType === 'ITEM_CARD' && <FavoriteButton isFavorite={item.isFavorite} onToggleFavorite={onToggleFavorite} />}
         </div>
+      </div>
+      <div className={styles['likes-container']}>
+        <FontAwesomeIcon icon={faHeart} color={'blue'} />
+        <p>{item.numberOfLikes} likes</p>
       </div>
       <p
         className={`${styles.description}`}

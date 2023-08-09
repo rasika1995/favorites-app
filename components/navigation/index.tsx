@@ -1,13 +1,16 @@
 "use client"
 import React from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname} from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faHeart } from '@fortawesome/free-solid-svg-icons';
-import styles from './navigation.module.scss'; // Import your SCSS module
+import styles from './navigation.module.scss';
 
+/**
+ * Navigation component provides navigation links for different sections of the application.
+ * It includes a top navigation bar for desktop and a bottom tab bar for mobile devices.
+ */
 const Navigation: React.FC = () => {
-  const router = useRouter();
   const pathname = usePathname();
 
   const isHomeSelected = pathname === '/';
