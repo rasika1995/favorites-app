@@ -1,7 +1,9 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ItemCard, { Item } from '@/components/item-card';
+import ItemCard from '@/components/item-card';
+import { Item } from '@/common/types';
+import { ITEM_CARD_TYPE } from '@/common/constants';
 
 const FavoritesPage: React.FC = () => {
   const [favoriteItems, setFavoriteItems] = useState<Array<Item>>([]);
@@ -21,16 +23,21 @@ const FavoritesPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="item-list" style={{display: 'flex', flexWrap: 'wrap'}}>
-      {favoriteItems.map((item: Item) => (
-        <ItemCard
-          key={item.id}
-          item={item}
-          cardType='FAVORITE_CARD'
-          onToggleFavorite={() => {}}
-        />
-      ))}
-    </div>
+    <>
+      <div className="item-list" style={{display: 'flex', flexWrap: 'wrap'}}>
+        {favoriteItems.map((item: Item) => (
+          <ItemCard
+            key={item.id}
+            item={item}
+            cardType={ITEM_CARD_TYPE.FAVORITE_CARD}
+            onToggleFavorite={() => {}}
+          />
+        ))}
+      </div>
+      <br/>
+      <br/>
+    </>
+   
   );
 };
 

@@ -3,29 +3,13 @@ import FavoriteButton from '../favorite-button';
 import styles from './item-card.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-
-export interface Item {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  currency: string;
-  imageUrl: string;
-  logoImageUrl: string;
-  logoTitle: string;
-  numberOfLikes: string;
-  comments: Array<{
-    commenter: string;
-    comment: string;
-    postedDate: string;
-  }>
-  isFavorite: boolean;
-}
+import { Item } from '@/common/types';
+import { ITEM_CARD_TYPE } from '@/common/constants';
 
 interface ItemProps {
   item: Item
   onToggleFavorite: () => void;
-  cardType: 'FAVORITE_CARD' | 'ITEM_CARD';
+  cardType: string
 }
 
 /**
@@ -59,12 +43,12 @@ const ItemCard: React.FC<ItemProps> = ({ item, onToggleFavorite, cardType }) => 
             <br />
             {item.currency} {item.price.toFixed(2)}
           </div>
-          {cardType === 'ITEM_CARD' && <FavoriteButton isFavorite={item.isFavorite} onToggleFavorite={onToggleFavorite} />}
+          {cardType === ITEM_CARD_TYPE.ITEM_CARD && <FavoriteButton isFavorite={item.isFavorite} onToggleFavorite={onToggleFavorite} />}
         </div>
       </div>
       <div className={styles['likes-container']}>
         <FontAwesomeIcon icon={faHeart} color={'blue'} />
-        <p>{(item.isFavorite || cardType === 'FAVORITE_CARD') ? item.numberOfLikes+1: item.numberOfLikes} likes</p>
+        <p>{(item.isFavorite || cardType === ITEM_CARD_TYPE.FAVORITE_CARD) ? item.numberOfLikes+1: item.numberOfLikes} likes</p>
       </div>
       <p
         className={`${styles.description}`}

@@ -1,7 +1,9 @@
 "use client"
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import ItemCard, { Item } from "@/components/item-card";
+import ItemCard from "@/components/item-card";
+import { Item } from "@/common/types";
+import { ITEM_CARD_TYPE } from "@/common/constants";
 
 const HomePage: React.FC = () => {
   const [items, setItems] = useState<Array<Item>>([]);
@@ -13,7 +15,8 @@ const HomePage: React.FC = () => {
         const responseItems = await axios.get('/api/items');
       
         if(responseItems.data.items){
-          const itemsR = responseItems.data.items.length > 0 && responseItems.data.items.map((item: Item)=> {
+          // Update items' favorite status based on the response
+          const updatedItems = responseItems.data.items.length > 0 && responseItems.data.items.map((item: Item)=> {
             const favoriteItems = responseFavorites?.data?.favoriteItems || [];
             if(favoriteItems.find((favorite: { id: number; }) => favorite.id === item.id)){
               item.isFavorite = true;
@@ -22,7 +25,7 @@ const HomePage: React.FC = () => {
             item.isFavorite = false;
             return item
           })
-          setItems(responseItems.data.items);
+          setItems(updatedItems);
         }
       } catch (error) {
         console.error('Error fetching items:', error);
@@ -90,7 +93,7 @@ const HomePage: React.FC = () => {
           <ItemCard
             key={item.id}
             item={item}
-            cardType='ITEM_CARD'
+            cardType={ITEM_CARD_TYPE.ITEM_CARD}
             onToggleFavorite={() => handleToggleFavorite(item.id, item.isFavorite)}
           />
         ))}

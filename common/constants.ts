@@ -1,0 +1,5 @@
+export const ITEM_CARD_TYPE = {
+    ITEM_CARD: 'ITEM_CARD',
+    FAVORITE_CARD: 'FAVORITE_CARD'
+};
+  
